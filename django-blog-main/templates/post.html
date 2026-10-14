@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Renders the unique dynamic database title tag -->
+    <title>{{ post.title }} | Lumuno's Blog</title>
+    <style>
+        body {
+            background-image: url("{% static 'images/image_gTFCHs.png' %}");
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-color: #031326; /* Deep cyber-navy fallback color */
+            color: #e6ebf0;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(4, 22, 46, 0.9); /* Solid layout translucent card */
+            border: 1px solid #1e3a8a;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+        .article-title {
+            color: #38bdf8; /* Vibrant light-blue titles */
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .article-meta {
+            color: #64748b;
+            font-family: monospace;
+            font-size: 13px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #1e3a8a;
+            padding-bottom: 15px;
+        }
+        .article-body {
+            line-height: 1.8;
+            font-size: 16px;
+            color: #cbd5e1;
+            white-space: pre-wrap; /* Keeps block paragraph line-breaks clean */
+        }
+        .lumuno-back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background: rgba(3, 19, 38, 0.9);
+            color: #8be0ff; /* Glowing neon blue font */
+            border: 2px solid #1e40af;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.2s ease-in-out;
+        }
+        .lumuno-back-btn:hover {
+            background: #0ea5e9;
+            color: #ffffff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="article-container">
+        <!-- 🟢 Fetching data records matching your views.py dictionary key definitions -->
+        <h1 class="article-title">{{ post.title }}</h1>
+        
+        <div class="article-meta">
+            Published: {{ post.created_at|date:"F d, Y" }}
+        </div>
+        
+        <div class="article-body">
+            {{ post.body }}
+        </div>
+        
+        <a href="/" class="lumuno-back-btn">
+            ← Back to Feed
+        </a>
+    </div>
+
+</body>
+</html>

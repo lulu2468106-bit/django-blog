@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lumuno's Admin Portal</title>
+    <style>
+        body {
+            background-image: url("{% static 'images/image_gTFCHs.png' %}");
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-color: #031326;
+            color: #e6ebf0;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .admin-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: rgba(4, 22, 46, 0.95);
+            border: 2px solid #2563eb; /* Strong blue admin outline border */
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+        h1 {
+            color: #38bdf8;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 28px;
+            border-bottom: 1px solid #1e3a8a;
+            padding-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: monospace;
+            color: #8be0ff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        /* Style adjustments injected into your Django inputs */
+        .cyber-input {
+            width: 100%;
+            padding: 12px;
+            background: #020c1b;
+            border: 1px solid #1e40af;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        .cyber-input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+        .lumuno-submit-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: rgba(3, 19, 38, 0.9);
+            color: #64f4a9; /* Custom neon-green for publishing safety */
+            border: 2px solid #059669;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 15px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.2s ease-in-out;
+        }
+        .lumuno-submit-btn:hover {
+            background: #059669;
+            color: #ffffff;
+            border-color: #34d399;
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <h1>Lumuno's Writing Desk</h1>
+        
+        <!-- Standard secure Django database form posting handler -->
+        <form method="POST">
+            {% csrf_token %} <!-- Essential security token block required by Django -->
+            
+            <div class="form-group">
+                <label>Article Title</label>
+                {{ form.title }}
+            </div>
+            
+            <div class="form-group">
+                <label>Content Body</label>
+                {{ form.body }}
+            </div>
+            
+            <button type="submit" class="lumuno-submit-btn">Publish to Feed →</button>
+        </form>
+    </div>
+
+</body>
+</html>

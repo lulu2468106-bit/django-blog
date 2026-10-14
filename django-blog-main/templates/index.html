@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Django Blog</title>
+    <style>
+        body {
+            background-image: url("{% static 'images/image_gTFCHs.png' %}");
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-color: #031326;
+            color: #e6ebf0;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 🟢 NEW: Fixed Administrative Cyber Navigation Top Bar */
+        .lumuno-nav {
+            width: 100%;
+            background: rgba(4, 22, 46, 0.95);
+            border-bottom: 2px solid #1e40af;
+            padding: 15px 40px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-logo {
+            font-family: monospace;
+            font-size: 20px;
+            font-weight: bold;
+            color: #38bdf8;
+            letter-spacing: 1px;
+        }
+
+        /* 🟢 NEW: Admin Portal Button Link Configuration */
+        .admin-link-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(3, 19, 38, 0.9);
+            color: #64f4a9; /* Custom secure bright green highlights */
+            border: 2px solid #059669;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .admin-link-btn:hover {
+            background: #059669;
+            color: #ffffff;
+            border-color: #34d399;
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+        }
+
+        .feed-container {
+            padding: 40px 20px;
+        }
+
+        .post-container {
+            max-width: 800px;
+            margin: 0 auto 24px auto;
+            background: rgba(4, 22, 46, 0.85);
+            border: 1px solid #1e3a8a;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .post-container h2 {
+            color: #38bdf8;
+            margin-top: 0;
+        }
+
+        .post-container p {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .lumuno-cyber-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(3, 19, 38, 0.9);
+            color: #8be0ff;
+            border: 2px solid #1e40af;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .lumuno-cyber-btn:hover {
+            background: #0ea5e9;
+            color: #ffffff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🟢 NEW: Navigation Banner Structure Component -->
+    <nav class="lumuno-nav">
+        <div class="nav-logo">LUMUNO // NET</div>
+        
+        <!-- Only shows this button hook if a valid Admin Superuser logs in -->
+        {% if user.is_superuser %}
+            <a href="/admin-panel/new/" class="admin-link-btn">+ Write New Post</a>
+        {% else %}
+            <a href="/admin/login/" class="admin-link-btn" style="color:#8be0ff; border-color:#1e40af;">Admin Login</a>
+        {% endif %}
+    </nav>
+
+    <div class="feed-container">
+        {% for post in posts %}
+            <div class="post-container">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.body|truncatewords:30 }}</p>
+                <a href="/post/{{ post.id }}/" class="lumuno-cyber-btn">
+                    Read Article
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
